@@ -4,7 +4,8 @@
 #'kitchen sink. It matrix multiplies data with a normal matrix
 #'that must be provided, clamping the negative results to 0, and
 #'then averaging across windows. Feature count and window size are
-#'determined by the provided normal matrix.
+#'determined by the column and row numbers of the provided normal matrix
+#'respectively.
 #'
 #' @param data   The data to be nonlinearized. Should not include the
 #'    variable to be modeled by the kitchen sink.

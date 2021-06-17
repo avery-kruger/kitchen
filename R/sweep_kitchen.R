@@ -54,7 +54,7 @@ sweep_kitchen <- function(
     trainx <- as.matrix(trainx)
   }
   if(is.data.frame(valx)){
-    trainx <- as.matrix(valx)
+    valx <- as.matrix(valx)
   }
   if(is.list(trainy)){
     trainy <- unlist(y)

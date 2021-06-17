@@ -79,7 +79,6 @@ boot_kitchen <- function(
   if(is.data.frame(predictx)){
     if(nrow(predictx) > 1){
       predictx <- as.matrix(predictx)
-      predictions <- matrix(NA, nrow=nrow(predictx), ncol=reps)
       } else{
       predictx <- matrix(predictx, nrow=1)
     }

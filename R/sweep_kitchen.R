@@ -77,11 +77,11 @@ sweep_kitchen <- function(
 
   for(f in 1:length(featuresweep)){
     for(w in 1:length(windowsweep)){
-      nonlinx <- nonlinearize(trainx, mynorms[[f]][[w]])
+      nonlinx <- kitchen(trainx, mynorms[[f]][[w]])
       x <- as.data.frame(nonlinx)
       model <- lm(trainy ~ ., data = x)
 
-      x <- as.data.frame(nonlinearize(valx, mynorms[[f]][[w]]))
+      x <- as.data.frame(kitchen(valx, mynorms[[f]][[w]]))
       predictions <- suppressWarnings(predict(model,x))
 
       valmodel <- lm(valy ~ predictions)

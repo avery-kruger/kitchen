@@ -81,7 +81,7 @@ boot_kitchen <- function(
       predictx <- as.matrix(predictx)
       predictions <- matrix(NA, nrow=nrow(predictx), ncol=reps)
       } else{
-      predictx <- matrix(predictx, 1)
+      predictx <- matrix(predictx, nrow=1)
     }
   }
   if(is.list(trainy)){

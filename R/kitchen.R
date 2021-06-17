@@ -35,6 +35,9 @@ kitchen <- function(data, norm){
   windowsize <- nrow(norm)
   if(nrow(norm) > ncol(data)) stop(
     'Normal matrix window size greater than ncol(data).')
+  if(is.data.frame(data)){
+    data <- as.matrix(data)
+  }
   output <- matrix(nrow=nrow(data),ncol=nfeatures)
   for(i in 1:nrow(data)){
     windows <- t(sapply(1:(ncol(data)-windowsize+1),

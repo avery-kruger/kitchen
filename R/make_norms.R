@@ -32,6 +32,8 @@
 #'
 #' @author Avery Kruger
 #'
+#' @importFrom stats rnorm
+#'
 #' @export
 
 make_norms <- function(featuresweep,

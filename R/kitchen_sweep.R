@@ -27,6 +27,9 @@
 #' lm(valy ~ predictions(valx)) for each model. Index [f,w] returns
 #' R^2 of the model for featuresweep[f] and windowsweep[w].
 #'
+#' @importFrom graphics abline
+#' @importFrom stats lm predict
+#'
 #'@seealso \code{\link{make_norms}}()
 #'
 #'   \code{\link{boot_kitchen}}

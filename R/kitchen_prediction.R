@@ -12,7 +12,7 @@
 #'  predictions using unique normal matrices; the set of predictions can be used
 #'  for confidence intervals of the true kernel function. If a set of
 #'  hyperparameters are provided, the function will generate predictions
-#'  for each unique combination, which could allow for model averaging.
+#'  for each unique combination, which could alow for model averaging.
 #'
 
 #'

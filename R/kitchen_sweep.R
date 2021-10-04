@@ -75,10 +75,10 @@ kitchen_sweep <- function(
     valx <- as.matrix(valx)
   }
   if(is.list(trainy)){
-    trainy <- unlist(y)
+    trainy <- unlist(trainy)
   }
   if(is.list(valy)){
-    trainy <- unlist(y)
+    trainy <- unlist(valy)
   }
 
   allr2 <- as.data.frame(

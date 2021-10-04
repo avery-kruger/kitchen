@@ -52,7 +52,7 @@
 #'    x[1001:2000,],y[1001:2000],
 #'    2^(4:8),2:5)
 #'
-#' a <- matrix(sample(1:10,1000,T),1,5)
+#' a <- matrix(sample(1:10,1000,TRUE),1,5)
 #' b <- 5*a[,1] + 20*a[,1]*a[,2] + 3*a[,3]^2 - 10*a[,4] - 2*a[,5]
 #' mybootstrap <- kitchen_prediction(x,y,a,64,5,bootstrap=10)
 #' hist(unlist(mybootstrap))

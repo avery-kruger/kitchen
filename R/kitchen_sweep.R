@@ -6,8 +6,6 @@
 #' Only uses a single normal matrix for each model, so expect some
 #' variance.
 #'
-#' test.
-#'
 #' Models are trained by ridge regression using \code{\link[glmnet]{cv.glmnet}},
 #' allowing for reduction of overfitting.
 #'

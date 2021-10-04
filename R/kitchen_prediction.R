@@ -30,6 +30,8 @@
 #' @param verbose Print progress.
 #' @param simplify Return a matrix rather than a list when there is only
 #' one combination of feature count and window size.
+#' @param clampoutliers Clamp predicted values beyond range of training values
+#' to the minimum or maximum of the training values.
 #' @param bootstrap A number of times to bootstrap predictions by predicting
 #' from data sampled with replacement.
 #' @param seed Set a seed for repeatable norms.
@@ -44,7 +46,7 @@
 #' @seealso \code{\link{kitchen_sweep}}()
 #'
 #' @examples
-#' x <- matrix(sample(1:10,10000,T),2000,5)
+#' x <- matrix(sample(1:10,10000,TRUE),2000,5)
 #' y <- 5*x[,1] + 20*x[,1]*x[,2] + 3*x[,3]^2 - 10*x[,4] - 2*x[,5]
 #' kitchen_sweep(x[1:1000,],y[1:1000],
 #'    x[1001:2000,],y[1001:2000],

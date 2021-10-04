@@ -1,14 +1,14 @@
-#' Make predictions with kitchen sink models
+#' Make predictions with Convolutional Kitchen Sinks
 #'
-#' `kitchen_prediction` trains kitchen sink models on training data and then
+#' `kitchen_prediction` trains models on CKS-projected training data and then
 #'  predicts values for some other data using those models.
 #'
 #'  This function has a few uses. Most simply, it can generate predictions for
 #'  data from a single kitchen sink model when provided with a single set of
 #'  hyperparameters (feature count and window size). \code{\link{kitchen_sweep}}()
-#'  can quickly assess what hyperparameters perform best. #' Models are trained by
+#'  can quickly assess what hyperparameters perform best. Models are trained by
 #'  ridge regression using \code{\link[glmnet]{cv.glmnet}}, allowing for reduction
-#'  of overfitting.When `reps` is greater than one, this function makes multiple
+#'  of overfitting. When `reps` is greater than one, this function makes multiple
 #'  predictions using unique normal matrices; the set of predictions can be used
 #'  for confidence intervals of the true kernel function. If a set of
 #'  hyperparameters are provided, the function will generate predictions

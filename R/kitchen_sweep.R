@@ -1,7 +1,7 @@
-#' Quickly check performance of different kitchen sink models
+#' Quickly check performance of different CKS models
 #'
 #' Sweeps across a set of feature counts and window sizes to provide
-#' an idea of how different convolutional kitchen sink models perform.
+#' an idea of how different Convolutional Kitchen Sinks perform.
 #' Trains on a set of training data, x and y, and validates on separate data.
 #' Only uses a single normal matrix for each model, so expect some
 #' variance.
@@ -9,10 +9,9 @@
 #' Models are trained by ridge regression using \code{\link[glmnet]{cv.glmnet}},
 #' allowing for reduction of overfitting.
 #'
-#'@param  trainx A matrix of independent data the kitchen sink models will
-#'    be trained on.
-#'@param  trainy  A vector of dependent data the kitchen sink models will
-#'    be trained on. trainy[i] should correspond to trainx[i,].
+#'@param  trainx A matrix of independent data the models will be trained on.
+#'@param  trainy  A vector of dependent data the models will be trained on.
+#' trainy[i] should correspond to trainx[i,].
 #'@param valx  A matrix of independent data the kitchen sink models will
 #'  use to  make predictions.  Columns should be organized identically to the
 #'  trainx data.

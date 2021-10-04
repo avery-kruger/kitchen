@@ -34,7 +34,7 @@
 #' @author Avery Kruger
 #'
 #' @examples
-#' x <- matrix(sample(1:10,500,T),100,5)
+#' x <- matrix(sample(1:10,500,TRUE),100,5)
 #' y <- x[,1]*x[,2]^2-0.5*x[,3]*x[,4]+x[,5]*x[,1]
 #'
 #' mynorm <- make_norms(64,5)[[1]][[1]]

@@ -6,7 +6,7 @@
 #' @param x  A numeric object.
 #' @param bias   A hyperparameter that can be used to adjust x.
 #' @param value The value to set (clamp) other values to.
-#' @param logic A logical function that returns which in x should be clamped.
+#' @param logic A logical operator or function that returns which in x should be clamped.
 #'
 #'
 #' @return Returns an object formatted identical to x

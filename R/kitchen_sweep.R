@@ -40,7 +40,7 @@
 #'   \code{\link{kitchen_sink}}()
 #'
 #' @examples
-#' x <- matrix(sample(1:10,1000,T),200,5)
+#' x <- matrix(sample(1:10,1000,TRUE),200,5)
 #' y <- x[,1]*x[,2]^2-0.5*x[,3]*x[,4]+x[,5]*x[,1]*x[,3]-x[,3]^2*x[,2]
 #'
 #' kitchen_sweep(trainx = x[1:100,],
@@ -49,7 +49,7 @@
 #' valy = y[101:200],
 #' featuresweep = c(2^(4:7),2^11,4000,6000,7000,2^13),
 #' windowsweep = 2:5,
-#' verbose = T,
+#' verbose = TRUE,
 #' ncores=2)
 #'
 #' @author Avery Kruger

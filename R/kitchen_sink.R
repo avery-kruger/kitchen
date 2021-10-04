@@ -1,13 +1,13 @@
-#' Nonlinearize data with a convolutional kitchen sink
+#' Project data with Convolutional Kitchen Sinks
 #'
-#' This function nonlinearizes data with a (convolutional)
-#'kitchen sink. It matrix multiplies data with a normal matrix
-#'that must be provided, clamping the negative results to 0, and
-#'then averaging across windows. Feature count and window size are
-#'determined by the column and row numbers of the provided normal matrix
-#'respectively.
+#' This function projects data with Convolutional Kitchen Sinks.
+#' It matrix multiplies data with a normal matrix that must be
+#' provided, clamping the negative results to 0, and
+#' then averaging across windows. Feature count and window size are
+#' determined by the column and row numbers of the provided normal matrix
+#' respectively.
 #'
-#' @param data   The data to be nonlinearized. Should not include the
+#' @param data   The data to be projected. Should not include the
 #'    variable to be modeled by the kitchen sink.
 #' @param norm   A normal matrix of dimensions c(window size, feature count).
 #'    Can be generated using \code{\link{make_norms}}(). Window size should be

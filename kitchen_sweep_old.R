@@ -27,27 +27,28 @@
 #'
 #'   \code{\link{boot_kitchen}}
 #'
-#'   \code{\link{kitchen}}()
+#'   \code{\link{kitchen_sink}}()
 #'
 #' @examples
 #' x <- matrix(sample(1:10,500,T),100,5)
 #' y <- x[,1]*x[,2]^2-0.5*x[,3]*x[,4]+x[,5]*x[,1]*x[,3]-x[,3]^2*x[,2]
 #'
 #' a <- matrix(sample(1:10,500,T),100,5)
-#' b <- x[,1]*x[,2]^2-0.5*x[,3]*x[,4]+x[,5]*x[,1]*x[,3]-x[,3]^2*x[,2]
+#' b <- a[,1]*a[,2]^2-0.5*a[,3]*a[,4]+a[,5]*a[,1]*a[,3]-a[,3]^2*a[,2]
 #'
-#' quicksweep(x,y,a,b,2^(4:8),2:5)
+#' kitchen_sweep(x,y,a,b,2^(4:8),2:5)
 #'
 #' @author Avery Kruger
 #'
 
-sweep_kitchen <- function(
+kitchen_sweep <- function(
   trainx,
   trainy,
   valx,
   valy,
   featuresweep,
   windowsweep,
+  ...,
   verbose = FALSE
 ){
   if(is.data.frame(trainx)){
@@ -73,15 +74,15 @@ sweep_kitchen <- function(
   rownames(allr2) <- as.character(featuresweep)
   colnames(allr2) <- as.character(windowsweep)
 
-  mynorms <- make_norms(featuresweep,windowsweep)
+  mynorms <- make_norms(featuresweep, windowsweep)
 
   for(f in 1:length(featuresweep)){
     for(w in 1:length(windowsweep)){
-      nonlinx <- kitchen(trainx, mynorms[[f]][[w]])
+      nonlinx <- kitchen_sink(trainx, mynorms[[f]][[w]], ...)
       x <- as.data.frame(nonlinx)
       model <- lm(trainy ~ ., data = x)
 
-      x <- as.data.frame(kitchen(valx, mynorms[[f]][[w]]))
+      x <- as.data.frame(kitchen_sink(valx, mynorms[[f]][[w]], ...))
       predictions <- suppressWarnings(predict(model,x))
 
       valmodel <- lm(valy ~ predictions)

@@ -4,7 +4,7 @@
 \alias{make_norms}
 \title{Create a set of normal matrices}
 \usage{
-make_norms(featuresweep, windowsweep)
+make_norms(featuresweep, windowsweep, mean = 0, sd = 1)
 }
 \arguments{
 \item{featuresweep}{A vector of feature sizes. Often varied in
@@ -12,6 +12,10 @@ exponents of 2, e.g. 2^c(4:10)}
 
 \item{windowsweep}{A vector of window sizes. Maximum should be no
 larger than the length of the data to be analyzed.}
+
+\item{mean}{Mean of the normal distribution.}
+
+\item{sd}{Standard deviation of the normal distribution}
 }
 \value{
 Returns a list of matrices where index [[f]][[w]] returns
@@ -31,14 +35,14 @@ mynorms <- make_norms(myfeaturesweep, mywindowsweep)
 
 for(f in 1:length(myfeaturesweep)){
   for(w in 1:length(mywindowsweep)){
-      nonlinearize(x,mynorms[[f]][[w]])
+      kitchen_sink(x,mynorms[[f]][[w]])
       }}
 
 }
 \seealso{
-\code{\link{sweep_kitchen}}()
+\code{\link{kitchen_sweep}}()
 
-\code{\link{kitchen}}()
+\code{\link{kitchen_sink}}()
 }
 \author{
 Avery Kruger

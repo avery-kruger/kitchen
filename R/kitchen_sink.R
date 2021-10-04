@@ -21,6 +21,7 @@
 #'    for breaking up large calculations.
 #' @param which_rows Specify rows to calculate for. Along with write_progress,
 #'    may be helpful for breaking up large calculations.
+#' @param ... Arguments to be passed to FUN, like a bias term.
 #'
 #' @return Returns a matrix of nonlinearized counterparts to the original rows
 #'   of the provided data. Column length is equal to the number of features,

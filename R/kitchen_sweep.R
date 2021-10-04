@@ -19,8 +19,11 @@
 #'  to validate predictions. valy[i] should correspond to valx[i,]
 #'@param featuresweep A vector of feature counts to sweep across.
 #'@param windowsweep A vector of window sizes to sweep across.
+#'@param clampoutliers Clamp predicted values beyond range of training values
+#' to the minimum or maximum of the training values.
 #'@param verbose Print progress.
 #'@param show.plot Draw plots of predicted values versus true for each model.
+#'@param seed A seed to generate identical normal matrices.
 #'@param ... Arguments to be passed to \code{\link{kitchen_sink}}().
 #'
 #'@return Returns a matrix of the adjusted R^2 values from the linear models
@@ -64,7 +67,6 @@ kitchen_sweep <- function(
   verbose = FALSE,
   show.plot = FALSE,
   seed = NULL,
-  partial_files = NULL,
   ...
 
 ){
@@ -97,10 +99,6 @@ kitchen_sweep <- function(
     on.exit(.Random.seed <<- global.seed)
     }
   mynorms <- make_norms(featuresweep, windowsweep)
-
-  if(!is.null(partial_files)){
-    list.files(pattern = partial_files)
-  }
 
   for(f in 1:length(featuresweep)){
     for(w in 1:length(windowsweep)){

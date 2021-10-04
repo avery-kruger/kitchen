@@ -28,7 +28,7 @@
 #'   #'
 #' @seealso \code{\link{make_norms}}()
 #'
-#'   \code{\link{max0}}
+#'   \code{\link{clamp}}
 #'
 #' @author Avery Kruger
 #'

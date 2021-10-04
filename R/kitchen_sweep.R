@@ -32,7 +32,7 @@
 #'
 #'@seealso \code{\link{make_norms}}()
 #'
-#'   \code{\link{boot_kitchen}}
+#'   \code{\link{kitchen_prediction}}
 #'
 #'   \code{\link{kitchen_sink}}()
 #'

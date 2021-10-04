@@ -41,7 +41,7 @@
 #'   values from a model with feature count features[f] and window size
 #'   windows[w].
 #'
-#' @seealso \code{\link{sweep_kitchen}}()
+#' @seealso \code{\link{kitchen_sweep}}()
 #'
 #' @examples
 #' x <- matrix(sample(1:10,10000,T),2000,5)

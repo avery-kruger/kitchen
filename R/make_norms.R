@@ -2,7 +2,7 @@
 #'
 #' `make_norms` creates a list of normal matrices of mean 0 and
 #' standard deviation 1 for each combination of feature length and
-#' window size that can easily be applied to \code{\link{kitchen}}().
+#' window size that can easily be applied to \code{\link{kitchen_sink}}().
 #'
 #' @param featuresweep   A vector of feature sizes. Often varied in
 #' exponents of 2, e.g. 2^c(4:10)

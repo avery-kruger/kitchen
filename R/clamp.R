@@ -12,7 +12,7 @@
 #' @author Avery Kruger
 #'
 #' @examples
-#' x <- matrix(rnorm(16,500,T),4,4)
+#' x <- matrix(rnorm(16,500,TRUE),4,4)
 #' clamp(x)
 #' clamp(x, logic = `>`)
 #'

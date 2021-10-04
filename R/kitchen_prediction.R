@@ -20,11 +20,11 @@
 #'   trainx[i,] should correspond with trainy[i].
 #' @param trainy A vector of dependent data to use for training models.
 #'   trainy[i] should correspond with trainx[i,].
-#' @param predictx A vector or matrix which `boot_kitchen` will predict values for.
+#' @param predictx A vector or matrix to predict values for.
 #'   Values must correspond with the training data.
-#' @param featuresweep A value or vector of feature counts to use in the
+#' @param features A value or vector of feature counts to use in the
 #'   kitchen sink models.
-#' @param windowsweep A value or vector of window sizes to use in the
+#' @param windows A value or vector of window sizes to use in the
 #'   kitchen sink models. Values should not exceed the column length
 #'   of the data.
 #' @param verbose Print progress.
@@ -38,8 +38,8 @@
 #' Can include a bias term or alternate nonlinearization functions.
 #'
 #' @return Returns a list where index [[f]][[w]] returns the predicted
-#'   values from a model with feature count featuresweep[f] and window size
-#'   windowsweep[w].
+#'   values from a model with feature count features[f] and window size
+#'   windows[w].
 #'
 #' @seealso \code{\link{sweep_kitchen}}()
 #'
@@ -63,8 +63,8 @@ kitchen_prediction <- function(
   trainx,
   trainy,
   predictx,
-  featuresweep,
-  windowsweep,
+  features,
+  windows,
   verbose = TRUE,
   simplify = FALSE,
   clampoutliers = TRUE,
@@ -77,12 +77,12 @@ kitchen_prediction <- function(
   if(ncol(trainx) != ncol(predictx)) stop(
     'Training data and prediction data columns do not match.'
   )
-  if(min(c(featuresweep,windowsweep)) < 1) stop(
+  if(min(c(features,windows)) < 1) stop(
     'All hyperparameters must be >= 1'
   )
-  if(max(windowsweep) > ncol(trainx)){
-    if(!(min(windowsweep) > ncol(trainx))){
-      windowsweep <- windowsweep[windowsweep <= ncol(trainx)]
+  if(max(windows) > ncol(trainx)){
+    if(!(min(windows) > ncol(trainx))){
+      windows <- windows[windows <= ncol(trainx)]
       print('Window size cannot be greater than ncol(trainx)')
       Sys.sleep(0.5)
       print('Using remaining window sizes')
@@ -109,10 +109,10 @@ kitchen_prediction <- function(
   }
 
   if(is.null(bootstrap)){reps <- 1}else{reps <- bootstrap}
-for(f in 1:length(featuresweep)){
+for(f in 1:length(features)){
   predictions[[f]] <- list()
-  attr(predictions[[f]],"feature count") <- featuresweep[f]
-  for(w in 1:length(windowsweep)){
+  attr(predictions[[f]],"feature count") <- features[f]
+  for(w in 1:length(windows)){
     if(any(is.vector(predictx), nrow(predictx) == 1)){
       predictions[[f]][[w]] <- matrix(NA, 1, reps)
     } else{
@@ -125,11 +125,11 @@ for(f in 1:length(featuresweep)){
       on.exit(.Random.seed <<- global.seed)
     }
 
-      mynorm <- make_norms(featuresweep[f], windowsweep[w])[[1]][[1]]
+      mynorm <- make_norms(features[f], windows[w])[[1]][[1]]
 
       if(verbose){
-        print(paste0(length(windowsweep)*(f-1)+w,"/",
-                     length(featuresweep)*length(windowsweep),
+        print(paste0(length(windows)*(f-1)+w,"/",
+                     length(features)*length(windows),
                      " Creating Kitchen Sink for Prediction Data"))}
       nonlinpredict <- kitchen_sink(predictx, mynorm, ...)
 
@@ -142,21 +142,21 @@ for(f in 1:length(featuresweep)){
         myy <- trainy}
 
       if(verbose){
-        print(paste0(length(windowsweep)*(f-1)+w,"/",
-                     length(featuresweep)*length(windowsweep),
+        print(paste0(length(windows)*(f-1)+w,"/",
+                     length(features)*length(windows),
                      " Creating Training Sink for Rep ", i))}
       nonlintrain <- kitchen_sink(myx, mynorm, ...)
 
       if(verbose){
-        print(paste0(length(windowsweep)*(f-1)+w,"/",
-                     length(featuresweep)*length(windowsweep),
+        print(paste0(length(windows)*(f-1)+w,"/",
+                     length(features)*length(windows),
                      " Running Ridge Regression"))}
       ridge_model <- glmnet::cv.glmnet(nonlintrain, myy, alpha = 0)
 
 
       if(verbose){
-        print(paste0(length(windowsweep)*(f-1)+w,"/",
-                     length(featuresweep)*length(windowsweep),
+        print(paste0(length(windows)*(f-1)+w,"/",
+                     length(features)*length(windows),
                      " Predicting"))}
 
       y_predicted <- predict(ridge_model$glmnet.fit,
@@ -174,17 +174,17 @@ for(f in 1:length(featuresweep)){
       }
       if(verbose){
         if(Sys.time() - mytime > 1){
-          print(paste0('Feature ',f, '/', length(featuresweep),
-                     ' Window ', w, '/', length(windowsweep),
+          print(paste0('Feature ',f, '/', length(features),
+                     ' Window ', w, '/', length(windows),
                      ' Rep ', i, '/', reps))
           mytime <- Sys.time()
         }
       }
       }
-    attr(predictions[[f]][[w]],"window size") <- windowsweep[w]
+    attr(predictions[[f]][[w]],"window size") <- windows[w]
   }
 }
-  if(length(featuresweep)*length(windowsweep) == 1 & simplify){
+  if(length(features)*length(windows) == 1 & simplify){
     return(unlist(predictions))
     } else{
     predictions

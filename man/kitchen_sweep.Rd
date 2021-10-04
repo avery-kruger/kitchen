@@ -2,7 +2,7 @@
 % Please edit documentation in R/kitchen_sweep.R
 \name{kitchen_sweep}
 \alias{kitchen_sweep}
-\title{Quickly check performance of different kitchen sink models}
+\title{Quickly check performance of different CKS models}
 \usage{
 kitchen_sweep(
   trainx,
@@ -15,16 +15,14 @@ kitchen_sweep(
   verbose = FALSE,
   show.plot = FALSE,
   seed = NULL,
-  partial_files = NULL,
   ...
 )
 }
 \arguments{
-\item{trainx}{A matrix of independent data the kitchen sink models will
-be trained on.}
+\item{trainx}{A matrix of independent data the models will be trained on.}
 
-\item{trainy}{A vector of dependent data the kitchen sink models will
-be trained on. trainy[i] should correspond to trainx[i,].}
+\item{trainy}{A vector of dependent data the models will be trained on.
+trainy[i] should correspond to trainx[i,].}
 
 \item{valx}{A matrix of independent data the kitchen sink models will
 use to  make predictions.  Columns should be organized identically to the
@@ -37,9 +35,14 @@ to validate predictions. valy[i] should correspond to valx[i,]}
 
 \item{windowsweep}{A vector of window sizes to sweep across.}
 
+\item{clampoutliers}{Clamp predicted values beyond range of training values
+to the minimum or maximum of the training values.}
+
 \item{verbose}{Print progress.}
 
 \item{show.plot}{Draw plots of predicted values versus true for each model.}
+
+\item{seed}{A seed to generate identical normal matrices.}
 
 \item{...}{Arguments to be passed to \code{\link{kitchen_sink}}().}
 }
@@ -50,7 +53,7 @@ R^2 of the model for featuresweep[f] and windowsweep[w].
 }
 \description{
 Sweeps across a set of feature counts and window sizes to provide
-an idea of how different convolutional kitchen sink models perform.
+an idea of how different Convolutional Kitchen Sinks perform.
 Trains on a set of training data, x and y, and validates on separate data.
 Only uses a single normal matrix for each model, so expect some
 variance.
@@ -60,7 +63,7 @@ Models are trained by ridge regression using \code{\link[glmnet]{cv.glmnet}},
 allowing for reduction of overfitting.
 }
 \examples{
-x <- matrix(sample(1:10,1000,T),200,5)
+x <- matrix(sample(1:10,1000,TRUE),200,5)
 y <- x[,1]*x[,2]^2-0.5*x[,3]*x[,4]+x[,5]*x[,1]*x[,3]-x[,3]^2*x[,2]
 
 kitchen_sweep(trainx = x[1:100,],
@@ -69,14 +72,14 @@ valx = x[101:200,],
 valy = y[101:200],
 featuresweep = c(2^(4:7),2^11,4000,6000,7000,2^13),
 windowsweep = 2:5,
-verbose = T,
+verbose = TRUE,
 ncores=2)
 
 }
 \seealso{
 \code{\link{make_norms}}()
 
-  \code{\link{boot_kitchen}}
+  \code{\link{kitchen_prediction}}
 
   \code{\link{kitchen_sink}}()
 }

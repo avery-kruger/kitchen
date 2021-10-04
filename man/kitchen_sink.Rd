@@ -2,7 +2,7 @@
 % Please edit documentation in R/kitchen_sink.R
 \name{kitchen_sink}
 \alias{kitchen_sink}
-\title{Nonlinearize data with a convolutional kitchen sink}
+\title{Project data with Convolutional Kitchen Sinks}
 \usage{
 kitchen_sink(
   data,
@@ -15,7 +15,7 @@ kitchen_sink(
 )
 }
 \arguments{
-\item{data}{The data to be nonlinearized. Should not include the
+\item{data}{The data to be projected. Should not include the
 variable to be modeled by the kitchen sink.}
 
 \item{norm}{A normal matrix of dimensions c(window size, feature count).
@@ -34,6 +34,8 @@ for breaking up large calculations.}
 
 \item{which_rows}{Specify rows to calculate for. Along with write_progress,
 may be helpful for breaking up large calculations.}
+
+\item{...}{Arguments to be passed to FUN, like a bias term.}
 }
 \value{
 Returns a matrix of nonlinearized counterparts to the original rows
@@ -42,15 +44,15 @@ Returns a matrix of nonlinearized counterparts to the original rows
   #'
 }
 \description{
-This function nonlinearizes data with a (convolutional)
-kitchen sink. It matrix multiplies data with a normal matrix
-that must be provided, clamping the negative results to 0, and
+This function projects data with Convolutional Kitchen Sinks.
+It matrix multiplies data with a normal matrix that must be
+provided, clamping the negative results to 0, and
 then averaging across windows. Feature count and window size are
 determined by the column and row numbers of the provided normal matrix
 respectively.
 }
 \examples{
-x <- matrix(sample(1:10,500,T),100,5)
+x <- matrix(sample(1:10,500,TRUE),100,5)
 y <- x[,1]*x[,2]^2-0.5*x[,3]*x[,4]+x[,5]*x[,1]
 
 mynorm <- make_norms(64,5)[[1]][[1]]
@@ -61,7 +63,7 @@ summary(lm(y ~ nonlinx))
 \seealso{
 \code{\link{make_norms}}()
 
-  \code{\link{max0}}
+  \code{\link{clamp}}
 }
 \author{
 Avery Kruger

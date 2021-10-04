@@ -10,6 +10,10 @@ clamp(x, bias = 0, value = 0, logic = `<`)
 \item{x}{A numeric object.}
 
 \item{bias}{A hyperparameter that can be used to adjust x.}
+
+\item{value}{The value to set (clamp) other values to.}
+
+\item{logic}{A logical function that returns which in x should be clamped.}
 }
 \value{
 Returns an object formatted identical to x
@@ -19,7 +23,7 @@ This function returns its input, with all values beyond a
 threshold set to a specified value (default 0).
 }
 \examples{
-x <- matrix(rnorm(16,500,T),4,4)
+x <- matrix(rnorm(16,500,TRUE),4,4)
 clamp(x)
 clamp(x, logic = `>`)
 

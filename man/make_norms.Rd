@@ -24,7 +24,7 @@ the normal matrix for featuresweep[f] and windowsweep[w].
 \description{
 `make_norms` creates a list of normal matrices of mean 0 and
 standard deviation 1 for each combination of feature length and
-window size that can easily be applied to \code{\link{kitchen}}().
+window size that can easily be applied to \code{\link{kitchen_sink}}().
 }
 \examples{
 x <- matrix(1:5000,100,50)

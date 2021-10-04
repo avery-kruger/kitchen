@@ -2,14 +2,14 @@
 % Please edit documentation in R/kitchen_prediction.R
 \name{kitchen_prediction}
 \alias{kitchen_prediction}
-\title{Make predictions with kitchen sink models}
+\title{Make predictions with Convolutional Kitchen Sinks}
 \usage{
 kitchen_prediction(
   trainx,
   trainy,
   predictx,
-  featuresweep,
-  windowsweep,
+  features,
+  windows,
   verbose = TRUE,
   simplify = FALSE,
   clampoutliers = TRUE,
@@ -26,13 +26,13 @@ trainx[i,] should correspond with trainy[i].}
 \item{trainy}{A vector of dependent data to use for training models.
 trainy[i] should correspond with trainx[i,].}
 
-\item{predictx}{A vector or matrix which `boot_kitchen` will predict values for.
+\item{predictx}{A vector or matrix to predict values for.
 Values must correspond with the training data.}
 
-\item{featuresweep}{A value or vector of feature counts to use in the
+\item{features}{A value or vector of feature counts to use in the
 kitchen sink models.}
 
-\item{windowsweep}{A value or vector of window sizes to use in the
+\item{windows}{A value or vector of window sizes to use in the
 kitchen sink models. Values should not exceed the column length
 of the data.}
 
@@ -40,6 +40,9 @@ of the data.}
 
 \item{simplify}{Return a matrix rather than a list when there is only
 one combination of feature count and window size.}
+
+\item{clampoutliers}{Clamp predicted values beyond range of training values
+to the minimum or maximum of the training values.}
 
 \item{bootstrap}{A number of times to bootstrap predictions by predicting
 from data sampled with replacement.}
@@ -53,40 +56,40 @@ Can include a bias term or alternate nonlinearization functions.}
 }
 \value{
 Returns a list where index [[f]][[w]] returns the predicted
-  values from a model with feature count featuresweep[f] and window size
-  windowsweep[w].
+  values from a model with feature count features[f] and window size
+  windows[w].
 }
 \description{
-`kitchen_prediction` trains kitchen sink models on training data and then
+`kitchen_prediction` trains models on CKS-projected training data and then
  predicts values for some other data using those models.
 }
 \details{
 This function has a few uses. Most simply, it can generate predictions for
  data from a single kitchen sink model when provided with a single set of
  hyperparameters (feature count and window size). \code{\link{kitchen_sweep}}()
- can quickly assess what hyperparameters perform best. #' Models are trained by
+ can quickly assess what hyperparameters perform best. Models are trained by
  ridge regression using \code{\link[glmnet]{cv.glmnet}}, allowing for reduction
- of overfitting.When `reps` is greater than one, this function makes multiple
+ of overfitting. When `reps` is greater than one, this function makes multiple
  predictions using unique normal matrices; the set of predictions can be used
  for confidence intervals of the true kernel function. If a set of
  hyperparameters are provided, the function will generate predictions
  for each unique combination, which could allow for model averaging.
 }
 \examples{
-x <- matrix(sample(1:10,10000,T),2000,5)
+x <- matrix(sample(1:10,10000,TRUE),2000,5)
 y <- 5*x[,1] + 20*x[,1]*x[,2] + 3*x[,3]^2 - 10*x[,4] - 2*x[,5]
 kitchen_sweep(x[1:1000,],y[1:1000],
    x[1001:2000,],y[1001:2000],
    2^(4:8),2:5)
 
-a <- matrix(sample(1:10,1000,T),1,5)
+a <- matrix(sample(1:10,1000,TRUE),1,5)
 b <- 5*a[,1] + 20*a[,1]*a[,2] + 3*a[,3]^2 - 10*a[,4] - 2*a[,5]
 mybootstrap <- kitchen_prediction(x,y,a,64,5,bootstrap=10)
 hist(unlist(mybootstrap))
 
 }
 \seealso{
-\code{\link{sweep_kitchen}}()
+\code{\link{kitchen_sweep}}()
 }
 \author{
 Avery Kruger

@@ -105,7 +105,7 @@ kitchen_prediction <- function(
     }
   }
   if(is.list(trainy)){
-    trainy <- unlist(y)
+    trainy <- unlist(trainy)
   }
 
   if(is.null(bootstrap)){reps <- 1}else{reps <- bootstrap}

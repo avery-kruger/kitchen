@@ -62,7 +62,7 @@ kitchen_sink <- function(data,
                                         "_")}
   if(is.null(which_rows)){which_rows <- seq(nrow(data))}
   todo <- seq(nrow(data))[which_rows]
-  temp <- mclapply(todo,
+  temp <- parallel::mclapply(todo,
                    function(i){
                      windows <- t(sapply(1:(ncol(data)-windowsize+1),
                                          function(w){data[i,w:(w+windowsize-1)]}))

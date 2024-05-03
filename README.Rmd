@@ -58,12 +58,12 @@ plot(b, rowMeans(mybootstrap[[1]][[1]]),
      xlab = "True", ylab = "Predicted"); abline(0, 1)
 ```
 
-##Author(s)
+## Author(s)
 
 Avery M. Kruger
 
 Maintainer: Avery M. Kruger, <avery.kruger@botany.ubc.ca>
 
-##References
+## References
 
 Kruger, A. M., Shankar, V., Davies, T.S. (2024) Inferring the Evolutionary Model of Community-Structuring Traits with Convolutional Kitchen Sinks. Systematic Biology (In Press).

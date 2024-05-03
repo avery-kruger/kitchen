@@ -37,11 +37,11 @@ kitchen_sweep(x[1:1000,],y[1:1000],
    x[1001:2000,],y[1001:2000],
    2^(4:8),2:5, verbose = F)
 #>             2         3         4         5
-#> 16  0.5946049 0.8139390 0.9132368 0.9182396
-#> 32  0.5945316 0.8378443 0.9167573 0.9459194
-#> 64  0.5929162 0.8457773 0.9373338 0.9726036
-#> 128 0.5951418 0.8485501 0.9128126 0.9796804
-#> 256 0.5942005 0.8477965 0.9368974 0.9840639
+#> 16  0.5412895 0.7965890 0.8953042 0.8944626
+#> 32  0.5426115 0.8249299 0.9013947 0.9227606
+#> 64  0.5435026 0.8378835 0.9276522 0.9729043
+#> 128 0.5435981 0.8382451 0.9373876 0.9775089
+#> 256 0.5438259 0.8380298 0.9390492 0.9817828
 #Models with 5 features appear to perform well.
 
 #Now, predict b given data with the same organization as x.
@@ -51,19 +51,21 @@ b <- 5*a[,1] + 20*a[,1]*a[,2] + 3*a[,3]^2 - 10*a[,4] - 2*a[,5]
 mybootstrap <- kitchen_prediction(x,y,a,
                                   features=64,windows=5,bootstrap=10,
                                   verbose = F)
+
+#Lets plot the mean of our predictions versus the true values
 plot(b, rowMeans(mybootstrap[[1]][[1]]),
      xlab = "True", ylab = "Predicted"); abline(0, 1)
 ```
 
 <img src="man/figures/README-example-1.png" width="40%" />
 
-\##Author(s)
+## Author(s)
 
 Avery M. Kruger
 
 Maintainer: Avery M. Kruger, <avery.kruger@botany.ubc.ca>
 
-\##References
+## References
 
 Kruger, A. M., Shankar, V., Davies, T.S. (2024) Inferring the
 Evolutionary Model of Community-Structuring Traits with Convolutional

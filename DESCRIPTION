@@ -7,8 +7,11 @@ Imports:
   parallel
 Author: Avery Kruger
 Maintainer: Avery Kruger <amkruger@ucdavis.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: kitchen allows for the implementation of a machine learning technique
+called convolutional kitchen sinks or convolutional random features. Using a Gaussian
+matrix, it produces a set of random features from data than can be effectively used for 
+machine learning. The package includes tools for producing features, training and testing 
+models, and predicting from models.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

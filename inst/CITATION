@@ -1,8 +1,11 @@
 bibentry(
   bibtype  = "Article",
   title    = "Inferring the Evolutionary Model of Community-Structuring Traits with Convolutional Kitchen Sinks",
-  author   = "Kruger, A.M., Shankar, V., Davies, T.J."
+  author   = "Kruger, A.M., Shankar, V., Davies, T.J.",
   journal  = "Systematic Biology",
   year     = "2024",
-  volume   = "In Press"
+  volume   = ,
+  number   = ,
+  pages    = ,
+  doi      =
 )
